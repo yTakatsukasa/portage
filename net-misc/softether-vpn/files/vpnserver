@@ -1,0 +1,44 @@
+#!/sbin/runscript
+
+BINDIR=/opt/vpnserver
+CONFIG_FILE=/etc/softether/vpn_server.config
+ETH_IFS=`\grep 'string DeviceName' ${CONFIG_FILE} | sed -e 's/string DeviceName//g' -e 's/\t//g' -e 's/ //g' -e 's/\r//g' -e 's/\n//g'`
+
+depend() {
+    for ifs in ${ETH_IFS}; do
+        need net.${ifs}
+    done
+}
+
+start() {
+    if [ -x /usr/sbin/ethtool ]; then
+        for ifs in ${ETH_IFS}; do
+            ebegin "Disabling all offloadings of ${ifs} for better performance"
+                /usr/sbin/ethtool -K ${ifs} \
+                rx off \
+                tx off \
+                sg off \
+                tso off \
+                gso off \
+                gro off \
+                lro off \
+                rxvlan off \
+                txvlan off \
+                ntuple off \
+                rxhash off
+            eend ${?};
+        done
+    else
+        ewarn "/usr/sbin/ethtool does not exist. Performance may degrade. Install sys-apps/ethtool"
+    fi
+
+    ebegin "Starting SoftEther vpnserver "
+        ${BINDIR}/vpnserver start > /dev/null
+    eend ${?}
+}
+
+stop() {
+    ebegin "Stopping SoftEther vpnserver "
+        ${BINDIR}/vpnserver stop > /dev/null
+    eend ${?}
+}

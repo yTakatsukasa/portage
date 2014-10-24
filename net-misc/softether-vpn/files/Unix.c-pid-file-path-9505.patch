@@ -1,0 +1,85 @@
+--- src/GlobalConst.h	2014-10-03 18:57:53.000000000 +0900
++++ src/GlobalConst.h	2014-10-16 13:11:36.665982816 +0900
+@@ -135,7 +135,9 @@
+ #define	CEDAR_BRIDGE_LINK_STR		"SoftEther VPN Bridge (Cascade Mode)"
+ #define	CEDAR_SERVER_FARM_STR		"SoftEther VPN Server (Cluster RPC Mode)"
+ 
+-
++#ifndef MAYAQUA_RUN_FILE_DIR
++#define MAYAQUA_RUN_FILE_DIR        "/var/run"
++#endif
+ 
+ //// Default Port Number
+ 
+--- src/Mayaqua/Unix.c	2014-10-03 18:57:55.000000000 +0900
++++ src/Mayaqua/Unix.c	2014-10-16 13:28:19.183795840 +0900
+@@ -913,7 +913,6 @@
+ 	UNIXLOCKFILE *ret;
+ 	char tmp[MAX_SIZE];
+ 	char name[MAX_SIZE];
+-	char dir[MAX_PATH];
+ 	int fd;
+ 	struct flock lock;
+ 	int mode = S_IRUSR | S_IWUSR;
+@@ -928,10 +927,9 @@
+ 		StrCpy(tmp, sizeof(tmp), instance_name);
+ 	}
+ 
+-	GetExeDir(dir, sizeof(dir));
+ 
+ 	// File name generation
+-	Format(name, sizeof(name), "%s/.%s", dir, tmp);
++	Format(name, sizeof(name), "%s/softether_%s", MAYAQUA_RUN_FILE_DIR, tmp);
+ 
+ 	fd = open(name, O_WRONLY);
+ 	if (fd == -1)
+@@ -2304,15 +2302,12 @@
+ 	char exe_name[MAX_PATH];
+ 	UCHAR hash[MD5_SIZE];
+ 	char tmp1[64];
+-	char dir[MAX_PATH];
+ 	// Validate arguments
+ 	if (name == NULL)
+ 	{
+ 		return;
+ 	}
+ 
+-	GetExeDir(dir, sizeof(dir));
+-
+ 	GetExeName(exe_name, sizeof(exe_name));
+ 	StrCat(exe_name, sizeof(exe_name), ":pid_hash");
+ 	StrUpper(exe_name);
+@@ -2320,7 +2315,7 @@
+ 	Hash(hash, exe_name, StrLen(exe_name), false);
+ 	BinToStr(tmp1, sizeof(tmp1), hash, sizeof(hash));
+ 
+-	Format(name, size, "%s/.pid_%s", dir, tmp1);
++	Format(name, size, "%s/softether_%s.pid", MAYAQUA_RUN_FILE_DIR, tmp1);
+ }
+ 
+ // Delete the PID file
+@@ -2349,15 +2344,12 @@
+ 	char exe_name[MAX_PATH];
+ 	UCHAR hash[MD5_SIZE];
+ 	char tmp1[64];
+-	char dir[MAX_PATH];
+ 	// Validate arguments
+ 	if (name == NULL)
+ 	{
+ 		return;
+ 	}
+ 
+-	GetExeDir(dir, sizeof(dir));
+-
+ 	GetExeName(exe_name, sizeof(exe_name));
+ 	StrCat(exe_name, sizeof(exe_name), ":pid_hash");
+ 	StrUpper(exe_name);
+@@ -2365,7 +2357,7 @@
+ 	Hash(hash, exe_name, StrLen(exe_name), false);
+ 	BinToStr(tmp1, sizeof(tmp1), hash, sizeof(hash));
+ 
+-	Format(name, size, "%s/.ctl_%s", dir, tmp1);
++	Format(name, size, "%s/softether_%s.ctl", MAYAQUA_RUN_FILE_DIR, tmp1);
+ }
+ 
+ // Write the CTL file

@@ -1,0 +1,22 @@
+--- src/Cedar/Server.c.orig	2014-10-03 18:57:56.000000000 +0900
++++ src/Cedar/Server.c	2014-10-16 09:48:07.738553127 +0900
+@@ -10741,6 +10741,7 @@
+ // 
+ bool SiIsEnterpriseFunctionsRestrictedOnOpenSource(CEDAR *c)
+ {
++#if 0
+ 	char region[128];
+ 	bool ret = false;
+ 	// Validate arguments
+@@ -10757,7 +10758,11 @@
+ 		ret = true;
+ 	}
+ 
++
+ 	return ret;
++#else
++    return false; //always allow full feature
++#endif
+ }
+ 
+ // Update the current region

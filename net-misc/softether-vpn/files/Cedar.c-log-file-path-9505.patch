@@ -1,0 +1,56 @@
+--- src/Cedar/Cedar.h	2014-10-03 18:57:55.000000000 +0900
++++ src/Cedar/Cedar.h	2014-10-18 16:06:31.122167975 +0900
+@@ -510,22 +510,25 @@
+ #define	LOG_ENGINE_BUFFER_CACHE_SIZE_MAX	(10 * 1024 * 1024)	// Write cache size
+ 
+ // Constant such as a file name
+-#define	SERVER_LOG_DIR_NAME			"@server_log"
++#ifndef SOFTETHER_LOG_DIR
++#define SOFTETHER_LOG_DIR           "/var/log/softether/"
++#endif
++#define	SERVER_LOG_DIR_NAME			SOFTETHER_LOG_DIR "server_log"
+ #define	BRIDGE_LOG_DIR_NAME			SERVER_LOG_DIR_NAME
+ #define	SERVER_LOG_PERFIX			"vpn"
+ 
+-#define	HUB_SECURITY_LOG_DIR_NAME	"@security_log"
+-#define	HUB_SECURITY_LOG_FILE_NAME	"@security_log/%s"
++#define	HUB_SECURITY_LOG_DIR_NAME	SOFTETHER_LOG_DIR "security_log"
++#define	HUB_SECURITY_LOG_FILE_NAME	SOFTETHER_LOG_DIR "security_log/%s"
+ #define	HUB_SECURITY_LOG_PREFIX		"sec"
+-#define	HUB_PACKET_LOG_DIR_NAME		"@packet_log"
+-#define	HUB_PACKET_LOG_FILE_NAME	"@packet_log/%s"
++#define	HUB_PACKET_LOG_DIR_NAME		SOFTETHER_LOG_DIR "packet_log"
++#define	HUB_PACKET_LOG_FILE_NAME	SOFTETHER_LOG_DIR "packet_log/%s"
+ #define	HUB_PACKET_LOG_PREFIX		"pkt"
+ 
+-#define	NAT_LOG_DIR_NAME			"@secure_nat_log"
+-#define	NAT_LOG_FILE_NAME			"@secure_nat_log/%s"
++#define	NAT_LOG_DIR_NAME			SOFTETHER_LOG_DIR "secure_nat_log"
++#define	NAT_LOG_FILE_NAME			SOFTETHER_LOG_DIR "secure_nat_log/%s"
+ #define	NAT_LOG_PREFIX				"snat"
+ 
+-#define	CLIENT_LOG_DIR_NAME			"@client_log"
++#define	CLIENT_LOG_DIR_NAME			SOFTETHER_LOG_DIR "client_log"
+ #define	CLIENT_LOG_PREFIX			"client"
+ 
+ // Packet log settings
+@@ -560,8 +563,8 @@
+ #define	DISK_FREE_CHECK_INTERVAL_DEFAULT	(5 * 60 * 1000)
+ 
+ // Simple log
+-#define TINY_LOG_DIRNAME			"@tiny_log"
+-#define TINY_LOG_FILENAME			"@tiny_log/%04u%02u%02u_%02u%02u%02u.log"
++#define TINY_LOG_DIRNAME			SOFTETHER_LOG_DIR "tiny_log"
++#define TINY_LOG_FILENAME			SOFTETHER_LOG_DIR "tiny_log/%04u%02u%02u_%02u%02u%02u.log"
+ 
+ 
+ //////////////////////////////////////////////////////////////////////
+@@ -574,7 +577,7 @@
+ //#define CE_SNAPSHOT_INTERVAL		((UINT64)(3000))
+ #define CE_SNAPSHOT_POLLING_INTERVAL	(1 * 1000)
+ #define CE_SNAPSHOT_POLLING_INTERVAL_LICENSE	(30 * 1000)
+-#define CE_SNAPSHOT_DIR_NAME		"@carrier_log"
++#define CE_SNAPSHOT_DIR_NAME		SOFTETHER_LOG_DIR "carrier_log"
+ #define CE_SNAPSHOT_PREFIX			"carrier"
+ 
+ 
