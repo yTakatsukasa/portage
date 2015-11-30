@@ -21,10 +21,10 @@ RDEPEND="${DEPEND} sys-apps/ethtool"
 S=${WORKDIR}/v${PV}-${REV}
 
 src_prepare() {
-	epatch ${FILESDIR}/Unix.c-no-threads-max-${REV}.patch
-	epatch ${FILESDIR}/Unix.c-pid-file-path-${REV}.patch
-	epatch ${FILESDIR}/Server.c-activate-all-feature-${REV}.patch
-	epatch ${FILESDIR}/Cedar.c-log-file-path-${REV}.patch
+	epatch ${FILESDIR}/Unix.c-no-threads-max.patch
+	epatch ${FILESDIR}/Unix.c-pid-file-path.patch
+	epatch ${FILESDIR}/Server.c-activate-all-feature.patch
+	epatch ${FILESDIR}/Cedar.c-log-file-path.patch
 }
 
 src_configure() {
