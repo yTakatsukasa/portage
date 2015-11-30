@@ -39,6 +39,8 @@ src_configure() {
 }
 
 src_install() {
+	# see files/Unix.c-no-threads-max.patch
+	export DISABLE_LINUX_THREADS_MAX_SETTING=1
 	dst=opt
 	for target in server client cmd bridge; do
 		Target=`echo $target | /bin/tr a-z A-Z`

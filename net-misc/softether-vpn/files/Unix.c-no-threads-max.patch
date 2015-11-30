@@ -1,18 +1,12 @@
---- src/Mayaqua/Unix.c.orig	2014-10-03 18:57:55.000000000 +0900
-+++ src/Mayaqua/Unix.c	2014-10-15 22:31:25.735591287 +0900
-@@ -2222,6 +2222,7 @@
+--- v4.19-9599/src/Mayaqua/Unix.c	2015-10-19 20:47:50.000000000 +0900
++++ v4.19-9599/src/Mayaqua/Unix.c	2015-11-30 21:40:19.995716149 +0900
+@@ -2222,7 +2222,8 @@
  #endif	// RLIMIT_NPROC
  
  	// Write a value to the threads-max of the proc file system
-+#if 0 //not necessary for our system and cause violation during build on gentoo
- 	o = UnixFileCreate("/proc/sys/kernel/threads-max");
+-	o = UnixFileCreate("/proc/sys/kernel/threads-max");
++	//cause violation during build on gentoo, so disable this by the environment variable
++	o = getenv("DISABLE_LINUX_THREADS_MAX_SETTING") ? NULL : UnixFileCreate("/proc/sys/kernel/threads-max");
  	if (o != NULL)
  	{
-@@ -2230,6 +2231,7 @@
- 		UnixFileWrite(o, tmp, strlen(tmp));
- 		UnixFileClose(o, false);
- 	}
-+#endif
- 
- 	// Set the signals that is to be ignored
- 	signal(SIGPIPE, SIG_IGN);
+ 		char tmp[128];
