@@ -6,13 +6,13 @@ DESCRIPTION="SoftEther VPN"
 
 HOMEPAGE="https://softether.org/"
 
-VER_BETA="-beta"
+RESTRICT="mirror"
+
 REV=`echo ${PR} | /bin/sed -e s/r//g`
 SRC_URI="http://jp.softether-download.com/files/softether/v${PV}-${REV}${VER_BETA}-${VER_DATE}-tree/Source_Code/softether-src-v${PV}-${REV}${VER_BETA}.tar.gz"
 LICENSE="GPL2"
 
 SLOT="0"
-KEYWORDS="x86 amd64"
 IUSE="+cmd +server -bridge -client"
 DEPEND=""
 RDEPEND="${DEPEND} sys-apps/ethtool"
