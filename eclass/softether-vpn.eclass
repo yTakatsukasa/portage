@@ -27,12 +27,11 @@ src_prepare() {
 }
 
 src_configure() {
-	if use x86; then
-		#cp src/makefiles/linux_32bit.mak Makefile
+	if use arm; then
 		echo "BITS	:= 32" > Makefile
-	fi
-	if use amd64; then
-		#cp src/makefiles/linux_64bit.mak Makefile
+	elif use x86; then
+		echo "BITS	:= 32" > Makefile
+	elif use amd64; then
 		echo "BITS	:= 64" > Makefile
 	fi
 	cat ${FILESDIR}/Makefile >> Makefile
