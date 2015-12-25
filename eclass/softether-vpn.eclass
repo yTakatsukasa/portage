@@ -33,6 +33,8 @@ src_configure() {
 		echo "BITS	:= 32" > Makefile
 	elif use amd64; then
 		echo "BITS	:= 64" > Makefile
+	else
+		die "No valid architecture is given"
 	fi
 	cat ${FILESDIR}/Makefile >> Makefile
 }
