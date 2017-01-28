@@ -13,7 +13,7 @@ start() {
 	eend $? || return $?
 
 	ebegin "Starting remote desktop session manager"
-	start-stop-daemon --start --pidfile /var/run/xrdp-sesman.pid --exec /usr/sbin/xrdp-sesman > /dev/null
+	/usr/sbin/xrdp-sesman > /dev/null
 	eend $?
 }
 
@@ -23,6 +23,6 @@ stop() {
 	eend $?
 
 	ebegin "Stopping remote desktop session manager"
-	start-stop-daemon --stop --pidfile /var/run/xrdp-sesman.pid
+	/usr/sbin/xrdp-sesman -k > /dev/null
 	eend $?
 }
