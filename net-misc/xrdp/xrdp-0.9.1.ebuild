@@ -8,8 +8,6 @@ inherit autotools eutils pam
 
 DESCRIPTION="An open source Remote Desktop Protocol server"
 HOMEPAGE="http://www.xrdp.org/"
-# mirrored from https://github.com/neutrinolabs/xrdp/releases
-#SRC_URI="https://github.com/neutrinolabs/xrdp/releases/download/v0.9.1/xrdp-0.9.1.tar.gz"
 SRC_URI="https://github.com/neutrinolabs/xrdp/releases/download/v0.9.1/${P}.tar.gz"
 
 LICENSE="Apache-2.0"
@@ -17,9 +15,16 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-RDEPEND=""
+RDEPEND="
+	dev-libs/openssl:0=
+	x11-libs/libX11:0=
+	x11-libs/libXfixes:0=
+	x11-libs/libXrandr:0=
+	net-misc/tigervnc:0[server,xorgmodule]
+	net-misc/x11rdp:0
+	"
+
 DEPEND="${RDEPEND}"
-RDEPEND="${RDEPEND}"
 
 src_prepare() {
 	epatch_user
