@@ -21,7 +21,6 @@ RDEPEND="
 	x11-libs/libXfixes:0=
 	x11-libs/libXrandr:0=
 	net-misc/tigervnc:0[server,xorgmodule]
-	net-misc/x11rdp:0
 	"
 
 DEPEND="${RDEPEND}"
