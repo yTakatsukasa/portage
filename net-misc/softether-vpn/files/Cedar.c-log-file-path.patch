@@ -58,7 +58,7 @@
  // 
  //////////////////////////////////////////////////////////////////////
  
-+#define SOFTETHER_SETTING_DIR       "/etc/softher/"
++#define SOFTETHER_SETTING_DIR       "/etc/softether/"
 +
  // Administrator Username
  #define	ADMINISTRATOR_USERNAME		"administrator"
