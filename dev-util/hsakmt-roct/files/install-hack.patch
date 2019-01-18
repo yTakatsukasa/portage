@@ -1,0 +1,15 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index cb2605b72565..80d35c08092f 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -140,6 +140,10 @@ add_custom_target ( package-dev DEPENDS build-dev
+ ## Add the install directives for the runtime library.
+ install ( TARGETS ${HSAKMT_TARGET} DESTINATION ${CMAKE_INSTALL_LIBDIR} )
+ install ( FILES ${SOURCE_DIR}/LICENSE.md DESTINATION libhsakmt )
++install ( FILES ${SOURCE_DIR}/LICENSE.md DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/libhsakmt )
++install ( FILES ${SOURCE_DIR}/include/hsakmt.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/libhsakmt )
++install ( FILES ${SOURCE_DIR}/include/hsakmttypes.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/libhsakmt )
++install ( FILES ${SOURCE_DIR}/include/linux/kfd_ioctl.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/libhsakmt/linux )
+ 
+ ## Add the packaging directives for the runtime library.
+ set ( CPACK_PACKAGE_NAME ${HSAKMT_PACKAGE} )

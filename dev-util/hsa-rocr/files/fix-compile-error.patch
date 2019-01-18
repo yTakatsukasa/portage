@@ -1,0 +1,13 @@
+diff --git a/src/core/runtime/runtime.cpp b/src/core/runtime/runtime.cpp
+index af94a1ae64a4..2cbe40b37a75 100644
+--- a/src/core/runtime/runtime.cpp
++++ b/src/core/runtime/runtime.cpp
+@@ -256,7 +256,7 @@ void Runtime::SetLinkCount(size_t num_link) {
+   const size_t last_index = GetIndexLinkInfo(0, num_link);
+   link_matrix_.resize(last_index);
+ 
+-  memset(&link_matrix_[0], 0,
++  memset(reinterpret_cast<void*>(&link_matrix_[0]), 0,
+          link_matrix_.size() * sizeof(hsa_amd_memory_pool_link_info_t));
+ }
+ 

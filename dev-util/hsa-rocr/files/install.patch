@@ -1,0 +1,17 @@
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index a1cdfc716da7..dcaad51e3925 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -171,10 +171,8 @@ add_custom_target ( hsa-link ALL WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} C
+ add_custom_target ( ${CORE_RUNTIME_TARGET}.so-link ALL WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} COMMAND ${CMAKE_COMMAND} -E create_symlink ../hsa/lib/${CORE_RUNTIME_LIBRARY}.so ${CORE_RUNTIME_LIBRARY}.so-link )
+ 
+ ## Set install information
+-install ( TARGETS ${CORE_RUNTIME_TARGET} LIBRARY DESTINATION hsa/lib )
+-install ( DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/inc/ DESTINATION hsa/include/hsa )
+-install ( FILES ${CMAKE_CURRENT_BINARY_DIR}/hsa-link DESTINATION include PERMISSIONS OWNER_WRITE OWNER_READ RENAME hsa )
+-install ( FILES ${CMAKE_CURRENT_BINARY_DIR}/${CORE_RUNTIME_LIBRARY}.so-link DESTINATION lib PERMISSIONS OWNER_WRITE OWNER_READ RENAME ${CORE_RUNTIME_LIBRARY}.so )
++install ( TARGETS ${CORE_RUNTIME_TARGET} LIBRARY DESTINATION lib64 )
++install ( DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/inc/ DESTINATION include/hsa )
+ 
+ ## Packaging directives
+ set ( CPACK_PACKAGE_NAME "hsa-rocr-dev" )
