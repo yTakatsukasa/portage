@@ -14,7 +14,7 @@ KEYWORDS="~amd64"
 
 src_configure() {
     mkdir -p build; cd build
-    cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="${D}/opt/rocm/hcc" ..
+    cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="${D}/opt/rocm/hcc" -DCMAKE_SHARED_LINKER_FLAGS='-Wl,-rpath=/opt/rocm/hcc/lib' ..
 }
 
 src_compile() {
