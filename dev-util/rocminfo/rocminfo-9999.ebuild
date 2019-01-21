@@ -12,7 +12,7 @@ KEYWORDS="~amd64"
 
 src_configure() {
     mkdir -p build; cd build
-	cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="${D}/opt/rocm/" ..
+	cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="/opt/rocm/" ..
 }
 
 src_compile() {
@@ -23,5 +23,5 @@ src_compile() {
 src_install()
 {
     cd build
-    emake install
+    emake DESTDIR=${D} install
 }

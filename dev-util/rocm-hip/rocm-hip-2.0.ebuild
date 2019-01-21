@@ -15,7 +15,7 @@ KEYWORDS="~amd64"
 
 src_configure() {
     mkdir -p build; cd build
-	cmake -DHSA_PATH=/opt/rocm -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="${D}/opt/rocm/hip" ..
+	cmake -DHSA_PATH=/opt/rocm -DCMAKE_BUILD_TYPE=Release ..
 }
 
 src_compile() {
@@ -26,5 +26,5 @@ src_compile() {
 src_install()
 {
     cd build
-    emake install
+    emake DESTDIR=${D} install
 }
