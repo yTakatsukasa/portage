@@ -2,7 +2,7 @@ EAPI=7
 inherit git-r3
 
 DEPEND="dev-util/rocm-hip \
-	dev-util/rocsparse \
+	dev-util/roc-sparse \
 "
 DESCRIPTION="ROCm SPARSE marshalling library"
 
