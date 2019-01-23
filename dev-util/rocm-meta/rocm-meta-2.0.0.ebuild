@@ -1,8 +1,8 @@
 EAPI=7
 inherit git-r3
 
-DEPEND="dev-util/rocm-rand \
-	dev-util/romc-sparse \
+DEPEND="dev-util/roc-rand \
+	dev-util/roc-sparse \
 	"
 DESCRIPTION="RADEON Open Compute"
 
