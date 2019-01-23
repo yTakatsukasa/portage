@@ -28,4 +28,7 @@ src_install()
 {
     cd build
     emake DESTDIR=/ install
+	for f in ${D}/opt/rocm/hip/lib/cmake/hip/*.cmake; do
+		sed -i -s "s|${D}||g" ${f}
+	done
 }

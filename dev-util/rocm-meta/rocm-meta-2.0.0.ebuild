@@ -1,5 +1,4 @@
 EAPI=7
-inherit git-r3
 
 DEPEND="dev-util/roc-rand \
 	dev-util/roc-sparse \
