@@ -1,6 +1,7 @@
 EAPI=7
 
-DEPEND="dev-util/roc-rand \
+DEPEND="dev-util/hip-blas \
+	dev-util/roc-rand \
 	dev-util/roc-sparse \
 	"
 DESCRIPTION="RADEON Open Compute"
