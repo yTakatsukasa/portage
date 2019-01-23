@@ -15,7 +15,8 @@ KEYWORDS="~amd64"
 
 src_configure() {
     mkdir -p build; cd build
-	cmake -DHSA_PATH=/opt/rocm -DCMAKE_BUILD_TYPE=Release ..
+	#Because the following cmake command copies some .cmake to isntallation directory.
+	cmake -DHIP_PLATFORM=hcc -DHSA_PATH=/opt/rocm -DCMAKE_INSTALL_PREFIX=${D}/opt/rocm/hip -DCMAKE_BUILD_TYPE=Release ..
 }
 
 src_compile() {
@@ -26,5 +27,5 @@ src_compile() {
 src_install()
 {
     cd build
-    emake DESTDIR=${D} install
+    emake DESTDIR=/ install
 }
