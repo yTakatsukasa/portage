@@ -11,6 +11,7 @@ EGIT_COMMIT="roc-${PV}"
 LICENSE="UoI-NCSA"
 SLOT="0"
 KEYWORDS="~amd64"
+DEPEND=dev-util/hsa-rocr
 
 src_configure() {
     mkdir -p build; cd build
