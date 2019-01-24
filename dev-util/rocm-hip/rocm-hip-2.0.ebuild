@@ -14,11 +14,20 @@ EGIT_OVERRIDE_BRANCH_ROCM_DEVELOPER_TOOLS_HIP="roc-${PV}.x"
 
 SLOT="0"
 KEYWORDS="~amd64"
+IUSE="debug"
+RESTRICT="debug? ( strip )"
+
+
 
 src_configure() {
+	if use debug; then
+		CMAKE_BUILD_TYPE=Debug
+	else
+		CMAKE_BUILD_TYPE=Release
+	fi
     mkdir -p build; cd build
 	#Because the following cmake command copies some .cmake to isntallation directory.
-	cmake -DHIP_PLATFORM=hcc -DHSA_PATH=/opt/rocm -DCMAKE_INSTALL_PREFIX=${D}/opt/rocm/hip -DCMAKE_BUILD_TYPE=Release ..
+	cmake -L -DHIP_PLATFORM=hcc -DHSA_PATH=/opt/rocm -DCMAKE_INSTALL_PREFIX=${D}/opt/rocm/hip -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} ..
 }
 
 src_compile() {

@@ -12,6 +12,8 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
 DEPEND="sys-process/numactl"
+IUSE="debug"
+RESTRICT="debug? ( strip )"
 
 src_unpack() {
     unpack ${A}

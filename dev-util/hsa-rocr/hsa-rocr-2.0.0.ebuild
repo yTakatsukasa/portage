@@ -17,7 +17,8 @@ SLOT="0"
 KEYWORDS="~amd64"
 S="${WORKDIR}/${P}/src"
 
-IUSE="+hsa-ext"
+IUSE="+hsa-ext debug"
+RESTRICT="debug? ( strip )"
 
 DEPEND="dev-util/hsakmt-roct"
 RDEPEND="${DEPEND}"

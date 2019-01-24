@@ -10,10 +10,17 @@ EGIT_REPO_URI="https://github.com/RadeonOpenCompute/rocm-cmake.git"
 
 SLOT="0"
 KEYWORDS="~amd64"
+IUSE="debug"
+RESTRICT="debug? ( strip )"
 
 src_configure() {
+	if use debug; then
+		CMAKE_BUILD_TYPE=Debug
+	else
+		CMAKE_BUILD_TYPE=Release
+	fi
     mkdir -p build; cd build
-	cmake .. -DCMAKE_INSTALL_PREFIX=/opt/rocm/
+	cmake -L -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=/opt/rocm/ ..
 }
 
 src_compile() {

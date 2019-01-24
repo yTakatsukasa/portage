@@ -12,10 +12,17 @@ LICENSE="UoI-NCSA"
 SLOT="0"
 KEYWORDS="~amd64"
 DEPEND=dev-util/hsa-rocr
+IUSE="debug"
+RESTRICT="debug? ( strip )"
 
 src_configure() {
+	if use debug; then
+		CMAKE_BUILD_TYPE=Debug
+	else
+		CMAKE_BUILD_TYPE=Release
+	fi
     mkdir -p build; cd build
-    cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="/opt/rocm/hcc" -DCMAKE_SHARED_LINKER_FLAGS='-Wl,-rpath=/opt/rocm/hcc/lib' ..
+    cmake -L -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX="/opt/rocm/hcc" -DCMAKE_SHARED_LINKER_FLAGS='-Wl,-rpath=/opt/rocm/hcc/lib' ..
 }
 
 src_compile() {

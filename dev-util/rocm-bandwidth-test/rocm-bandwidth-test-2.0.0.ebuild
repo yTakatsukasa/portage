@@ -9,10 +9,17 @@ EGIT_COMMIT="roc-${PV}"
 EGIT_BRANCH="master"
 SLOT="0"
 KEYWORDS="amd64"
+IUSE="debug"
+RESTRICT="debug? ( strip )"
 
-	src_configure() {
+src_configure() {
+	if use debug; then
+		CMAKE_BUILD_TYPE=Debug
+	else
+		CMAKE_BUILD_TYPE=Release
+	fi
 	mkdir -p build && cd build
-	cmake -L ..
+	cmake -L -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} ..
 }
 
 src_compile() {
