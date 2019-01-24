@@ -1,7 +1,9 @@
 EAPI=7
 inherit git-r3
 
-DEPEND=dev-util/hsa-rocr
+DEPEND="dev-util/hsa-rocr \
+	dev-util/hcc \
+	"
 DESCRIPTION="HIP : Convert CUDA to Portable C++ Code"
 HOMEPAGE="https://github.com/ROCm-Developer-Tools/HIP/"
 
