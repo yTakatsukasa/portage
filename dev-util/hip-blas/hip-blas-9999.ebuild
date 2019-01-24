@@ -1,7 +1,9 @@
 EAPI=7
 inherit git-r3
 
-DEPEND=dev-util/rocm-hip
+DEPEND="dev-util/rocm-hip \
+	dev-util/roc-blas \
+	"
 DESCRIPTION="ROCm BLAS marshalling library"
 
 HOMEPAGE="https://github.com/ROCmSoftwarePlatform/hipBLAS/"
