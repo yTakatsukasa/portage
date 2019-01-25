@@ -16,6 +16,8 @@ RESTRICT="debug? ( strip )"
 src_configure() {
 	if use debug; then
 		CMAKE_BUILD_TYPE=Debug
+		CFLAGS="$(echo ${CFLAGS} | sed -e 's/-O.//g') -O0 -g"
+		CXXFLAGS="$(echo ${CXXFLAGS} | sed -e 's/-O.//g') -O0 -g"
 	else
 		CMAKE_BUILD_TYPE=Release
 	fi

@@ -24,7 +24,6 @@ RDEPEND="
 
 BUILD_DIR="${S}_build"
 CMAKE_USE_DIR="${S}/opencl"
-CMAKE_BUILD_TYPE="Release"
 
 src_unpack() {
     mkdir -p "${S}" && cd "${S}"
@@ -35,9 +34,16 @@ src_unpack() {
 }
 
 src_configure() {
+	if use debug; then
+		CMAKE_BUILD_TYPE=Debug
+		CFLAGS="$(echo ${CFLAGS} | sed -e 's/-O.//g') -O0 -g"
+		CXXFLAGS="$(echo ${CXXFLAGS} | sed -e 's/-O.//g') -O0 -g"
+	else
+		CMAKE_BUILD_TYPE=Release
+	fi
     mkdir -p "${BUILD_DIR}" || die "Failed to create build dir"
     cd "${BUILD_DIR}"
-    cmake -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCLANG_ENABLE_STATIC_ANALYZER=On "${CMAKE_USE_DIR}"
+    cmake -L -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCLANG_ENABLE_STATIC_ANALYZER=On "${CMAKE_USE_DIR}"
 }
 
 src_compile() {
