@@ -8,9 +8,8 @@ DESCRIPTION="HIP : Convert CUDA to Portable C++ Code"
 HOMEPAGE="https://github.com/ROCm-Developer-Tools/HIP/"
 
 EGIT_REPO_URI="https://github.com/ROCm-Developer-Tools/HIP.git"
-#EGIT_SUBMODULES=( '*' )
-#EGIT_COMMIT="roc-${PV}.x"
-EGIT_OVERRIDE_BRANCH_ROCM_DEVELOPER_TOOLS_HIP="roc-${PV}.x"
+EGIT_COMMIT="roc-${PV}"
+EGIT_BRANCH="roc-$(ver_cut 1-2).x"
 
 SLOT="0"
 KEYWORDS="~amd64"
@@ -21,7 +20,8 @@ RESTRICT="debug? ( strip )"
 
 src_configure() {
 	if use debug; then
-		CMAKE_BUILD_TYPE=Debug
+		#CMAKE_BUILD_TYPE=Debug or RelWithDebInfo causes hipBlas build failure
+		CMAKE_BUILD_TYPE=Release
 		CFLAGS="$(echo ${CFLAGS} | sed -e 's/-O.//g') -O0 -g"
 		CXXFLAGS="$(echo ${CXXFLAGS} | sed -e 's/-O.//g') -O0 -g"
 	else
