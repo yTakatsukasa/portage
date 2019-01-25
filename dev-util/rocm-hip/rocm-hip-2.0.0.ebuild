@@ -14,8 +14,9 @@ EGIT_BRANCH="roc-$(ver_cut 1-2).x"
 SLOT="0"
 KEYWORDS="amd64"
 IUSE="debug"
-RESTRICT="debug? ( strip )"
-
+#Always disable strip because stripped library cause hipMemsetAsync failure.
+#RESTRICT="debug? ( strip )"
+RESTRICT="strip"
 
 
 src_configure() {
