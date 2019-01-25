@@ -26,7 +26,7 @@ src_configure() {
 		CMAKE_BUILD_TYPE=Release
 	fi
     mkdir -p build; cd build
-	cmake -L -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} ..
+	cmake -L -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DBUILD_CLIENTS_SAMPLES=OFF ..
 }
 
 src_compile() {
