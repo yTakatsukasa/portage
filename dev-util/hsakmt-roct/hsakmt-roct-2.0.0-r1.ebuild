@@ -26,7 +26,7 @@ src_configure() {
 		CMAKE_BUILD_TYPE=Release
 	fi
     mkdir -p build; cd build
-	cmake -L -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}  ..
+	cmake -L -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}  ..
 }
 
 
@@ -37,8 +37,8 @@ src_compile() {
 
 src_install() {
     cd build
-    emake DESTDIR=${D} install
 	insinto /usr/include/
 	doins ../include/*.h
-    #emake install
+	into /usr/
+	dolib.so lib*.so*
 }
