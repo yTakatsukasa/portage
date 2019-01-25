@@ -12,8 +12,10 @@ EGIT_COMMIT="v${PV}"
 
 SLOT="0"
 KEYWORDS="amd64"
-IUSE="debug"
-RESTRICT="debug? ( strip )"
+IUSE="debug +pgo"
+#Disable strip otherwise hipGemm always fails
+#RESTRICT="debug? ( strip )"
+RESTRICT="strip"
 
 src_configure() {
 	if use debug; then
@@ -24,16 +26,19 @@ src_configure() {
 		CMAKE_BUILD_TYPE=Release
 	fi
 	#SMI and/or rocminfo accesses here
-	addpredict /dev/kfd
-	#addread /dev/kfd
-	#addwrite /dev/kfd
-	#if [ -d /dev/dri ]; then
-		#addread /dev/dri
-		#addwrite /dev/dri
-	#fi
-	addpredict /dev/random
-	einfo "devices"
-	/opt/rocm/bin/rocm_agent_enumerator
+	if use pgo; then
+		if [ -e /dev/kfd ]; then
+			addwrite /dev/kfd
+		fi
+		if [ -d /dev/dri ]; then
+			addwrite /dev/dri
+		fi
+		addpredict /dev/random
+		einfo "devices"
+		/opt/rocm/bin/rocm_agent_enumerator
+	else
+		addpredict /dev/kfd
+	fi
 	#Because Tensile works only on python2.7, but most of gentoo user uses 3.x as default. so set explicitly.
 	sed -e 's/virtualenv.py/virtualenv.py -p python2.7/' -i cmake/virtualenv.cmake
     mkdir -p build; cd build
