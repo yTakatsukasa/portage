@@ -12,7 +12,7 @@ EGIT_COMMIT="roc-${PV}"
 EGIT_BRANCH="roc-$(ver_cut 1-2).x"
 
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 IUSE="debug"
 RESTRICT="debug? ( strip )"
 
