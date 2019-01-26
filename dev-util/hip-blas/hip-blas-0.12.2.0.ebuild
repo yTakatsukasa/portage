@@ -1,12 +1,12 @@
 EAPI=7
 inherit git-r3
 
-IUSE="debug +roc_amd roc_nv"
+IUSE="debug +hip_amd hip_nv"
 DEPEND="dev-util/rocm-hip \
-	roc_amd? ( dev-util/roc-blas ) \
-	roc_nv? ( dev-util/nvidia-cuda-sdk ) \
+	hip_amd? ( dev-util/roc-blas ) \
+	hip_nv? ( dev-util/nvidia-cuda-sdk ) \
 	"
-BACKENDS="roc_amd roc_nv"
+BACKENDS="hip_amd hip_nv"
 REQUIRED_USE="|| ( $BACKENDS )"
 DESCRIPTION="ROCm BLAS marshalling library"
 
@@ -30,7 +30,7 @@ src_configure() {
 	for backend in ${BACKENDS}; do
 		if use $backend; then
 			einfo "Configuring for $backend"
-			if [ $backend = "roc_amd" ]; then
+			if [ $backend = "hip_amd" ]; then
 				#Force to use hipBlas
 				CUDA_TOOLKIT_ROOT_DIR=/dev/null
 				CMAKE_INSTALL_PREFIX=/opt/rocm
