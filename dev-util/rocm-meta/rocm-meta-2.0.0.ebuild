@@ -5,6 +5,7 @@ DEPEND="dev-util/hip-blas \
 	dev-util/hip-sparse \
 	dev-util/rocm-smi \
 	dev-util/rocm-info \
+	dev-util/hip-thrust \
 	"
 DESCRIPTION="RADEON Open Compute"
 
