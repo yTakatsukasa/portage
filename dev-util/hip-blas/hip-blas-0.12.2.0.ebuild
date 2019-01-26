@@ -40,6 +40,7 @@ src_configure() {
 			fi
 			mkdir -p build_${backend}; cd build_${backend}
 			cmake -L \
+				-DCMAKE_SHARED_LINKER_FLAGS='-Wl,-rpath=$ORIGIN/../../rocblas/lib:$ORIGIN/../../hip/lib' \
 				-DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} \
 				-DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX} \
 				-DCUDA_TOOLKIT_ROOT_DIR=${CUDA_TOOLKIT_ROOT_DIR} .. || die
@@ -51,7 +52,7 @@ src_configure() {
 src_compile() {
 	for backend in ${BACKENDS}; do
 		if use $backend; then
-			emake -C build_${backend}
+			emake -C build_${backend} || die
 		fi
 	done
 }
@@ -59,7 +60,7 @@ src_compile() {
 src_install() {
 	for backend in ${BACKENDS}; do
 		if use $backend; then
-			emake -C build_${backend} DESTDIR=${D} install
+			emake -C build_${backend} DESTDIR=${D} install || die
 		fi
 	done
 }
