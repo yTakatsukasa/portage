@@ -40,7 +40,7 @@ src_configure() {
 			fi
 			mkdir -p build_${backend}; cd build_${backend}
 			cmake -L \
-				-DCMAKE_SHARED_LINKER_FLAGS='-Wl,-rpath=$ORIGIN/../../rocblas/lib:$ORIGIN/../../hip/lib' \
+				-DCMAKE_SHARED_LINKER_FLAGS='-Wl,-rpath=$ORIGIN/../../rocblas/lib:$ORIGIN/../../hip/lib:$ORIGIN:$ORIGIN/../rocblas/lib:$ORIGIN/../hip/lib' \
 				-DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} \
 				-DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX} \
 				-DCUDA_TOOLKIT_ROOT_DIR=${CUDA_TOOLKIT_ROOT_DIR} .. || die
