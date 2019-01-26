@@ -42,7 +42,11 @@ src_configure() {
 	#Because Tensile works only on python2.7, but most of gentoo user uses 3.x as default. so set explicitly.
 	sed -e 's/virtualenv.py/virtualenv.py -p python2.7/' -i cmake/virtualenv.cmake
     mkdir -p build; cd build
-	env CXX=/opt/rocm/hcc/bin/hcc TENSILE_ROCM_ASSEMBLER_PATH=/opt/rocm/hcc/bin/hcc cmake -L -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} ..
+	env CXX=/opt/rocm/hcc/bin/hcc TENSILE_ROCM_ASSEMBLER_PATH=/opt/rocm/hcc/bin/hcc \
+		cmake -L \
+		-DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} \
+		-DCMAKE_SHARED_LINKER_FLAGS='-Wl,-rpath=$ORIGIN/../../hip/lib:$ORIGIN/../hip/lib' \
+		.. || die
 }
 
 src_compile() {
@@ -50,8 +54,7 @@ src_compile() {
     emake
 }
 
-src_install()
-{
+src_install() {
     cd build
     emake DESTDIR=${D} install
 }
