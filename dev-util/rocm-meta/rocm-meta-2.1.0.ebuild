@@ -7,6 +7,7 @@ DEPEND="
 	dev-util/hip-sparse \
 	=dev-util/rocm-smi-${PV}* \
 	dev-util/rocm-info \
+	=dev-util/rocm-hip-${PV}* \
 	dev-util/hip-thrust \
 	"
 DESCRIPTION="RADEON Open Compute"
