@@ -1,0 +1,1 @@
+rocm-smi-2.0.0.ebuild

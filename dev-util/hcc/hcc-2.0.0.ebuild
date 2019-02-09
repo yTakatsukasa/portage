@@ -10,8 +10,8 @@ EGIT_COMMIT="roc-${PV}"
 
 LICENSE="UoI-NCSA"
 SLOT="0"
-KEYWORDS="~amd64"
-DEPEND=dev-util/hsa-rocr
+KEYWORDS="amd64"
+DEPEND==dev-util/hsa-rocr-${PV}*
 IUSE="debug"
 RESTRICT="debug? ( strip )"
 

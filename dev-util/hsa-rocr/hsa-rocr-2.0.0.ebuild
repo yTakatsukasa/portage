@@ -14,13 +14,13 @@ SRC_URI="
 
 LICENSE="NCSA"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 S="${WORKDIR}/${P}/src"
 
 IUSE="+hsa-ext debug"
 RESTRICT="debug? ( strip )"
 
-DEPEND="dev-util/hsakmt-roct"
+DEPEND="=dev-util/hsakmt-roct-${PV}*"
 RDEPEND="${DEPEND}"
 
 src_unpack() {
