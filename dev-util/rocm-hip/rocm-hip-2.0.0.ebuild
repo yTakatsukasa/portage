@@ -2,8 +2,8 @@ EAPI=7
 inherit git-r3
 
 IUSE="debug +hip_amd hip_nv"
-DEPEND="dev-util/hsa-rocr \
-	dev-util/hcc \
+DEPEND="=dev-util/hsa-rocr-${PV}* \
+	=dev-util/hcc-${PV}* \
 	hip_nv? ( dev-util/nvidia-cuda-sdk ) \
 	"
 DESCRIPTION="HIP : Convert CUDA to Portable C++ Code"
