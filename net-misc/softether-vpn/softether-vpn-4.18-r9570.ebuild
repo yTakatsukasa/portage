@@ -1,4 +1,4 @@
-EAPI=5
+EAPI=6
 
 VER_BETA="-rtm"
 VER_DATE="2015.07.26"
