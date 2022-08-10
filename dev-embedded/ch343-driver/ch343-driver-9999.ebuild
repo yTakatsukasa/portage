@@ -23,7 +23,7 @@ DEPEND="${RDEPEND}"
 
 pkg_setup() {
 	linux-mod_pkg_setup
-	BUILD_PARAMS="KERN_DIR=${KV_DIR} KERNOUT=${KV_OUT_DIR}"
+	BUILD_PARAMS="KERNELDIR=${KV_DIR} KERNOUT=${KV_OUT_DIR}"
 	MODULE_NAMES="ch343(usb/serial:${S}/driver:${S}/driver)"
 	BUILD_TARGETS="default"
 }
