@@ -8,8 +8,6 @@ EGIT_REPO_URI="https://github.com/WCHSoftGroup/ch343ser_linux.git"
 EGIT_CHECKOUT_DIR=${WORKDIR}/ch343ser_linux
 S=${EGIT_CHECKOUT_DIR}
 
-PATCHES=${FILESDIR}/kernel_bump.patch
-
 inherit eutils autotools git-r3 linux-mod
 
 RESTRICT="nomirror"
