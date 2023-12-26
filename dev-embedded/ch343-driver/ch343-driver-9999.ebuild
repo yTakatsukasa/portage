@@ -1,4 +1,4 @@
-EAPI=7
+EAPI=8
 
 DESCRIPTION="CH343 kernel driver"
 
@@ -8,7 +8,7 @@ EGIT_REPO_URI="https://github.com/WCHSoftGroup/ch343ser_linux.git"
 EGIT_CHECKOUT_DIR=${WORKDIR}/ch343ser_linux
 S=${EGIT_CHECKOUT_DIR}
 
-inherit eutils autotools git-r3 linux-mod
+inherit autotools git-r3 linux-mod
 
 RESTRICT="nomirror"
 
