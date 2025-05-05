@@ -1,6 +1,6 @@
 #!/sbin/openrc-run
 
-BINDIR=/opt/vpnserver
+BINDIR=/usr/libexec/softether/vpnserver
 CONFIG_FILE=/etc/softether/vpn_server.config
 ETH_IFS=`\grep 'string DeviceName' ${CONFIG_FILE} | sed -e 's/string DeviceName//g' -e 's/\t//g' -e 's/ //g' -e 's/\r//g' -e 's/\n//g'`
 PING_RETRY_LIMIT=15
@@ -20,7 +20,7 @@ function wait_until_ping_ok() {
     ebegin "PING to ${default_gw} until the ethernet device available"
     for i in $(seq 1 $PING_RETRY_LIMIT); do
         einfo "Trial $i"
-        /bin/ping -c 5 $default_gw > /dev/null
+        /usr/bin/ping -c 5 $default_gw > /dev/null
         if [ $? -eq 0 ] ; then
             eend 0
             return 0
